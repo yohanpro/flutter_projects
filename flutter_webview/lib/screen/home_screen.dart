@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('요한의 블로그'),
+        title: const Text('요한의 블로그입니다'),
         centerTitle: true,
         backgroundColor: Colors.black,
         actions: [

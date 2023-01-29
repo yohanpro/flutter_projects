@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:u_and_i/screen/home_screen.dart';
 
 void main() {
-  runApp(new MaterialApp(
-    title: 'My app', // used by the OS task switcher
-    home: new Text('Hello World'),
+  runApp(MaterialApp(
+    home: HomeScreen(),
   ));
 }

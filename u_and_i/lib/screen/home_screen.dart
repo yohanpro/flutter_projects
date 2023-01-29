@@ -13,17 +13,34 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.pink[100],
       body: SafeArea(
+        bottom: false,
         child: Container(
           width: MediaQuery.of(context).size.width,
           child: Column(
+            children: [_TopPart(), _BottomPart()],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _TopPart extends StatelessWidget {
+  const _TopPart({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            'U and I',
+            style: TextStyle(
+                fontSize: 80.0, fontFamily: 'parisienne', color: Colors.white),
+          ),
+          Column(
             children: [
-              Text(
-                'U and I',
-                style: TextStyle(
-                    fontSize: 80.0,
-                    fontFamily: 'parisienne',
-                    color: Colors.white),
-              ),
               Text('우리 처음 만난 날',
                   style: TextStyle(
                       color: Colors.white,
@@ -36,19 +53,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontFamily: 'sunflower',
                     fontSize: 20.0),
               ),
-              IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
-              Text(
-                'D+1',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'sunflower'),
-              )
             ],
           ),
-        ),
+          IconButton(
+              iconSize: 60.0,
+              color: Colors.red,
+              onPressed: () {},
+              icon: Icon(Icons.favorite)),
+          Text(
+            'D+1',
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 50.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'sunflower'),
+          )
+        ],
       ),
     );
+  }
+}
+
+class _BottomPart extends StatelessWidget {
+  const _BottomPart({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(child: Image.asset('asset/img/middle_image.png'));
   }
 }

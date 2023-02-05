@@ -79,28 +79,22 @@ class _TopPart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             'U and I',
-            style: TextStyle(
-                fontSize: 80.0, fontFamily: 'parisienne', color: Colors.white),
+            style: textTheme.headline1,
           ),
           Column(
             children: [
-              Text('우리 처음 만난 날',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'sunflower',
-                      fontSize: 30.0)),
+              Text('우리 처음 만난 날', style: textTheme.bodyText1),
               Text(
                 '${selectedDate.year}년 ${selectedDate.month}월 ${selectedDate.day}일',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'sunflower',
-                    fontSize: 20.0),
+                style: textTheme.bodyText2,
               ),
             ],
           ),
@@ -111,11 +105,7 @@ class _TopPart extends StatelessWidget {
               icon: Icon(Icons.favorite)),
           Text(
             'D+${DateTime.now().difference(selectedDate).inDays + 1}',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 50.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'sunflower'),
+            style: textTheme.headline2,
           )
         ],
       ),

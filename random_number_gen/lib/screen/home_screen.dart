@@ -42,11 +42,19 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('랜덤숫자'),
-                  Text('랜덤숫자'),
-                  Text('랜덤숫자'),
-                ],
+                children: [123, 456, 789]
+                    .map((x) => Row(
+                          children: x
+                              .toString()
+                              .split('')
+                              .map((y) => Image.asset(
+                                    'asset/img/$y.png',
+                                    height: 70.0,
+                                    width: 50.0,
+                                  ))
+                              .toList(),
+                        ))
+                    .toList(),
               )),
               SizedBox(
                   width: double.infinity,

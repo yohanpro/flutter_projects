@@ -9,7 +9,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  double maxNumber = 100000;
+  double maxNumber = 10000;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               Expanded(
                   child: Row(
-                children: maxNumber.toInt()
+                children: maxNumber
+                    .toInt()
                     .toString()
                     .split('')
                     .map((e) => Image.asset(
@@ -34,15 +36,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )),
               Slider(
                   value: maxNumber,
-                  min: 10000,
-                  max: 1000000,
+                  min: 1000,
+                  max: 10000,
                   onChanged: (double val) {
                     setState(() {
                       maxNumber = val;
                     });
                   }),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop(maxNumber.toInt());
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: RED_COLOR,
                   ),

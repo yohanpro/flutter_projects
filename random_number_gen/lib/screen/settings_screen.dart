@@ -21,40 +21,82 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                  child: Row(
-                children: maxNumber
-                    .toInt()
-                    .toString()
-                    .split('')
-                    .map((e) => Image.asset(
-                          'asset/img/$e.png',
-                          width: 50.0,
-                          height: 70.0,
-                        ))
-                    .toList(),
-              )),
-              Slider(
-                  value: maxNumber,
-                  min: 1000,
-                  max: 10000,
-                  onChanged: (double val) {
-                    setState(() {
-                      maxNumber = val;
-                    });
-                  }),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(maxNumber.toInt());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: RED_COLOR,
-                  ),
-                  child: Text('저장!'))
+              _Body(maxNumber: maxNumber),
+              _Footer(
+                maxNumber: maxNumber,
+                onSliderChanged: onSliderChanged,
+                onPressed: onButtonPressed,
+              )
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void onSliderChanged(double val) {
+    setState(() {
+      maxNumber = val;
+    });
+  }
+
+  void onButtonPressed() {
+    Navigator.of(context).pop(maxNumber.toInt());
+  }
+}
+
+class _Body extends StatelessWidget {
+  final double maxNumber;
+
+  const _Body({Key? key, required this.maxNumber}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: Row(
+      children: maxNumber
+          .toInt()
+          .toString()
+          .split('')
+          .map((e) => Image.asset(
+                'asset/img/$e.png',
+                width: 50.0,
+                height: 70.0,
+              ))
+          .toList(),
+    ));
+  }
+}
+
+class _Footer extends StatelessWidget {
+  final double maxNumber;
+  final ValueChanged<double>? onSliderChanged;
+  final VoidCallback? onPressed;
+
+  const _Footer(
+      {Key? key,
+      required this.maxNumber,
+      required this.onSliderChanged,
+      required this.onPressed})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Slider(
+            value: maxNumber,
+            min: 1000,
+            max: 10000,
+            onChanged: onSliderChanged),
+        ElevatedButton(
+            onPressed: onPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: RED_COLOR,
+            ),
+            child: Text('저장!'))
+      ],
     );
   }
 }

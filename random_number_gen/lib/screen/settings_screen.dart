@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:random_number_gen/component/number_row.dart';
 import 'package:random_number_gen/constants/color.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  final int maxNumber;
+
+  const SettingsScreen({Key? key, required this.maxNumber}) : super(key: key);
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -10,6 +13,13 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   double maxNumber = 10000;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    maxNumber = widget.maxNumber.toDouble();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,19 +62,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Row(
-      children: maxNumber
-          .toInt()
-          .toString()
-          .split('')
-          .map((e) => Image.asset(
-                'asset/img/$e.png',
-                width: 50.0,
-                height: 70.0,
-              ))
-          .toList(),
-    ));
+    return Expanded(child: NumberRow(number: maxNumber.toInt()));
   }
 }
 

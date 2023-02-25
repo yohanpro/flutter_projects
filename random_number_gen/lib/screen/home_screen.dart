@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:random_number_gen/component/number_row.dart';
 import 'package:random_number_gen/constants/color.dart';
 import 'package:random_number_gen/screen/settings_screen.dart';
 
@@ -12,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int maxNumbers = 1000;
+  int maxNumber = 1000;
   List<int> randomNumbers = [123, 456, 789];
 
   void updateRandomNumbers() {
@@ -31,11 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void onSettingsPop() async {
     final int? result = await Navigator.of(context)
         .push<int>(MaterialPageRoute(builder: (BuildContext context) {
-      return const SettingsScreen();
+      return SettingsScreen(
+        maxNumber: maxNumber,
+      );
     }));
     if (result != null) {
       setState(() {
-        maxNumbers = result;
+        maxNumber = result;
       });
     }
   }
@@ -106,17 +109,7 @@ class _Body extends StatelessWidget {
           .entries
           .map((x) => Padding(
                 padding: EdgeInsets.only(bottom: x.key == 2 ? 0 : 16.0),
-                child: Row(
-                  children: x.value
-                      .toString()
-                      .split('')
-                      .map((y) => Image.asset(
-                            'asset/img/$y.png',
-                            height: 70.0,
-                            width: 50.0,
-                          ))
-                      .toList(),
-                ),
+                child: NumberRow(number: x.value),
               ))
           .toList(),
     ));

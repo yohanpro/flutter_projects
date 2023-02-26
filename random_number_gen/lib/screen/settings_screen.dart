@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:random_number_gen/component/number_row.dart';
-import 'package:random_number_gen/constants/color.dart';
+
+import '../component/number_row.dart';
+import '../constants/color.dart';
 
 class SettingsScreen extends StatefulWidget {
   final int maxNumber;
 
-  const SettingsScreen({Key? key, required this.maxNumber}) : super(key: key);
+  const SettingsScreen({required this.maxNumber, Key? key}) : super(key: key);
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  _SettingsScreenState createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  double maxNumber = 10000;
+  double maxNumber = 1000;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+
     maxNumber = widget.maxNumber.toDouble();
   }
 
@@ -27,7 +28,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: PRIMARY_COLOR,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.0,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -35,8 +38,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _Footer(
                 maxNumber: maxNumber,
                 onSliderChanged: onSliderChanged,
-                onPressed: onButtonPressed,
-              )
+                onButtonPressed: onButtonPressed,
+              ),
             ],
           ),
         ),
@@ -58,25 +61,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
 class _Body extends StatelessWidget {
   final double maxNumber;
 
-  const _Body({Key? key, required this.maxNumber}) : super(key: key);
+  const _Body({
+    required this.maxNumber,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: NumberRow(number: maxNumber.toInt()));
+    return Expanded(
+      child: NumberRow(
+        number: maxNumber.toInt(),
+      ),
+    );
   }
 }
 
 class _Footer extends StatelessWidget {
   final double maxNumber;
   final ValueChanged<double>? onSliderChanged;
-  final VoidCallback? onPressed;
+  final VoidCallback onButtonPressed;
 
-  const _Footer(
-      {Key? key,
-      required this.maxNumber,
-      required this.onSliderChanged,
-      required this.onPressed})
-      : super(key: key);
+  const _Footer({
+    required this.maxNumber,
+    required this.onSliderChanged,
+    required this.onButtonPressed,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,16 +94,18 @@ class _Footer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Slider(
-            value: maxNumber,
-            min: 1000,
-            max: 10000,
-            onChanged: onSliderChanged),
+          value: maxNumber,
+          min: 1000,
+          max: 100000,
+          onChanged: onSliderChanged,
+        ),
         ElevatedButton(
-            onPressed: onPressed,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: RED_COLOR,
-            ),
-            child: Text('저장!'))
+          onPressed: onButtonPressed,
+          style: ElevatedButton.styleFrom(
+            primary: RED_COLOR,
+          ),
+          child: Text('저장!'),
+        ),
       ],
     );
   }

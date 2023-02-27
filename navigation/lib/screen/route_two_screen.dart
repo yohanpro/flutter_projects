@@ -8,11 +8,15 @@ class RouteTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)!.settings.arguments;
     return MainLayout(title: 'Route two', children: [
+      Text('arguments : ${arguments}',
+          textAlign: TextAlign.center, style: TextStyle(color: Colors.red)),
       ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => RouteThree()));
+              builder: (BuildContext context) => RouteThree(),
+            ));
           },
           child: Text('Push'))
     ]);

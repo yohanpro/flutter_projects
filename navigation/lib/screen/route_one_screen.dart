@@ -12,7 +12,8 @@ class RouteOne extends StatelessWidget {
       ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => RouteTwo()));
+                builder: (BuildContext context) => RouteTwo(),
+                settings: const RouteSettings(arguments: '789')));
           },
           child: Text('Push'))
     ]);

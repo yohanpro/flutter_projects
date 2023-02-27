@@ -8,7 +8,10 @@ class RouteThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)!.settings.arguments;
+
     return MainLayout(title: 'Route three', children: [
+      Text('arguments : ${arguments}'),
       ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(

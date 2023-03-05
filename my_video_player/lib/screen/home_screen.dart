@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Container(
+          decoration: getBoxDecoration(),
+          child: SizedBox(
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _Logo(),
+                SizedBox(
+                  height: 30.0,
+                ),
+                _AppName(),
+              ],
+            ),
+          ),
+        ));
+  }
+}
+
+BoxDecoration getBoxDecoration() {
+  return BoxDecoration(
+      gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Color(0xFF2a4a7c), Color((0xFF000118))]));
+}
+
+class _Logo extends StatelessWidget {
+  const _Logo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset('asset/image/logo.png');
+  }
+}
+
+
+class _AppName extends StatelessWidget {
+  const _AppName({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+        color: Colors.white, fontWeight: FontWeight.w300, fontSize: 30.0);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Video'.toUpperCase(), style: textStyle),
+        Text('Player'.toUpperCase(),
+            style: textStyle.copyWith(fontWeight: FontWeight.w700))
+      ],
+    );
+  }
+}

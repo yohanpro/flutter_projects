@@ -1,30 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  XFile? video;
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-          decoration: getBoxDecoration(),
-          child: SizedBox(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _Logo(),
-                SizedBox(
-                  height: 30.0,
-                ),
-                _AppName(),
-              ],
+    return Scaffold(body: video != null ? renderVideo() : renderEmpty());
+  }
+
+  Widget renderVideo() {
+    return Center(
+      child: Text('My Video'),
+    );
+  }
+
+  Widget renderEmpty() {
+    return Container(
+      decoration: getBoxDecoration(),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _Logo(
+              onTap: onLogoTap,
             ),
-          ),
-        ));
+            SizedBox(
+              height: 30.0,
+            ),
+            _AppName(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void onLogoTap() async {
+    final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
+    if (video != null) {
+      this.setState(() {
+        this.video = video;
+      });
+    }
   }
 }
 
@@ -37,14 +62,16 @@ BoxDecoration getBoxDecoration() {
 }
 
 class _Logo extends StatelessWidget {
-  const _Logo({Key? key}) : super(key: key);
+  final VoidCallback onTap;
+
+  const _Logo({required this.onTap, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('asset/image/logo.png');
+    return GestureDetector(
+        onTap: onTap, child: Image.asset('asset/image/logo.png'));
   }
 }
-
 
 class _AppName extends StatelessWidget {
   const _AppName({Key? key}) : super(key: key);
